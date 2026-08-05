@@ -27,8 +27,14 @@ dependencies {
 	testCompileOnly 'org.projectlombok:lombok'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	testAnnotationProcessor 'org.projectlombok:lombok'
-	runtimeOnly 'com.h2database:h2'
 	implementation 'org.springframework.boot:spring-boot-h2console'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// h2 추가
+	runtimeOnly 'com.h2database:h2'
+
+	//jpa 쿼리파라미터 확인
+	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:2.0.1'
 }
 
 tasks.named('test') {

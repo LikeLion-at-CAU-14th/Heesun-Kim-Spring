@@ -13,6 +13,19 @@ import java.util.*;
 @NoArgsConstructor
 public class Member {
 
+    @Builder
+    public Member(String name, String address, String email, String phoneNumber,
+                  Role role, Boolean isAdmin, Integer deposit, Integer age) {
+        this.name = name;
+        this.address = address;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.role = role;
+        this.isAdmin = isAdmin;
+        this.deposit = deposit;
+        this.age = age;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,6 +34,8 @@ public class Member {
     private String address;
     private String email;
     private String phoneNumber;
+
+    private Integer age;
 
     @Enumerated(EnumType.STRING)
     private Role role; // 판매자면 SELLER, 구매자면 BUYER

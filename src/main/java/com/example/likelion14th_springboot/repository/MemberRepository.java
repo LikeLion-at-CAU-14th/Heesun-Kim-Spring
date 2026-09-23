@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    // ?? 아기사자가 채우기
     Optional<Member> findByEmail(String email);
 
     // 이름이 주어진 값으로 시작하는 회원 필터링

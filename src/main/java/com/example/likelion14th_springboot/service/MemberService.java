@@ -22,19 +22,16 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     public List<Member> getAllMembers(){
-        // ?? 아기사자가 채우기
         return memberRepository.findAll();
     }
 
     public Member getByEmail(String email){
-        // ?? 아기사자가 채우기
         return memberRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 이메일입니다: " + email));
 
     }
 
     public Page<Member> getMembersByPage(int page, int size){
-        // ?? 아기사자가 채우기
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
         return memberRepository.findAll(pageable);
     }

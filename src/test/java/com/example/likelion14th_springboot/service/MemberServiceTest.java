@@ -111,7 +111,7 @@ public class MemberServiceTest {
 
     @Test
     @DisplayName("나이가 20 이상이고 이름 기준 오름차순 정렬된 페이징 결과 반환")
-    void testGetAdultrMembersSortedByName() {
+    void testGetAdultMembersSortedByName() {
         // age = 15 + i (i: 1~30) 이므로 20세 이상인 회원은 i=5~30, 총 26명
         List<Member> expectedSorted = memberRepository.findAll().stream()
                 .filter(m -> m.getAge() >= 20)

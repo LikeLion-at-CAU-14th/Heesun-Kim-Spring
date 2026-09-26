@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product {
+public class Product extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,5 +37,13 @@ public class Product {
 
     public void reduceStock(int amount) {
         this.stock -= amount;
+    }
+
+    // [추가] 상품의 정보를 안전하게 변경하는 비즈니스 메서드
+    public void update(String name, Integer price, Integer stock, String description) {
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.description = description;
     }
 }

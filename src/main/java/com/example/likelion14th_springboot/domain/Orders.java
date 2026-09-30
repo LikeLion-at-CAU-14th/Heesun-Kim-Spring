@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,13 +26,34 @@ public class Orders extends BaseTimeEntity {
     private DeliverStatus deliverStatus; // 배송상태
 
     @ManyToOne
-    @JoinColumn(name ="buyer_id")
+    @JoinColumn(name = "buyer_id")
     private Member buyer;
 
+    @Embedded // 배송정보
+    private ShippingAddress shippingAddress;
+
+    @Builder.Default
+    private Boolean deleted = false;
+
+    @Builder.Default
     @OneToMany(mappedBy = "orders", cascade = CascadeType.ALL)
-    private List<ProductOrders> productOrders;
+    private List<ProductOrders> productOrders = new ArrayList<>();
 
     @OneToOne(mappedBy = "orders", cascade = CascadeType.ALL)
     private Coupon coupon;
-}
 
+    // 주문 상품 연결
+    public void addProductOrder(ProductOrders productOrder) {
+        this.productOrders.add(productOrder);
+    }
+
+    // 배송정보 수정
+    public void updateShippingAddress(ShippingAddress shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    // Soft Delete
+    public void softDelete() {
+        this.deleted = true;
+    }
+}

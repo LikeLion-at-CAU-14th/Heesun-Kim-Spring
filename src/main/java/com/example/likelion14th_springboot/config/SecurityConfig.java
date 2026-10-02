@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .cors((SecurityConfig::corsAllow)) // CORS 설정
                 .csrf(AbstractHttpConfigurer::disable) // 비활성화
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/join", "/login").permitAll() // 회원가입, 로그인은 모두 허용
+                        .requestMatchers("/join", "/login", "/error").permitAll() // 회원가입, 로그인, 에러 응답은 모두 허용
                         .requestMatchers("/**").authenticated()) // 나머지는 인증된 사용자만 허용
                 .formLogin(Customizer.withDefaults())
                 .logout(Customizer.withDefaults())

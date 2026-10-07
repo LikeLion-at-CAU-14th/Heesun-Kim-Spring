@@ -22,9 +22,10 @@ public class Member {
     private String email;
     private String phoneNumber;
     private Integer age;
+    private String password; // 비밀번호
 
     @Builder
-    public Member(String name, String address, String email, String phoneNumber, Integer age, Role role, Boolean isAdmin, Integer deposit) {
+    public Member(String name, String address, String email, String phoneNumber, Integer age, Role role, Boolean isAdmin, Integer deposit, String password) {
         this.name = name;
         this.address = address;
         this.email = email;
@@ -33,6 +34,7 @@ public class Member {
         this.isAdmin = isAdmin;
         this.deposit = deposit;
         this.age = age;
+        this.password = password;
     }
 
     @Enumerated(EnumType.STRING)

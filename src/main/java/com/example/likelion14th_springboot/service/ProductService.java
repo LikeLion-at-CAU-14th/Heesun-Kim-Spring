@@ -55,6 +55,26 @@ public class ProductService {
         return ProductResponseDto.fromEntity(product);
     }
 
+    // 3. 내가 판매자인 상품 목록 가져오기
+    public List<ProductResponseDto> getMyProducts(String username) {
+        // 1. 토큰에서 꺼낸 값으로 회원 조회
+        //    소셜 로그인 토큰엔 email, 일반 로그인 토큰엔 name이 들어 있어서 둘 다 확인
+        Member member = memberRepository.findByEmail(username)
+                .or(() -> memberRepository.findByName(username))
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+
+        // 2. 판매자(SELLER) 권한 확인
+        if (!member.isSeller()) {
+            throw new IllegalArgumentException("판매자만 조회할 수 있습니다.");
+        }
+
+        // 3. 이 회원이 판매자인 상품만 조회해서 DTO로 변환
+        return productRepository.findAllBySeller(member).stream()
+                .map(ProductResponseDto::fromEntity)
+                .toList();
+    }
+
+
     // 상품 정보 업데이트
     @Transactional
     public ProductResponseDto updateProduct(Long productId, ProductUpdateRequestDto dto) {

@@ -21,7 +21,8 @@ spring:
   # 추가
   config:
     import: optional:application-secret.yml
-
+  profiles:
+    active: deployment
   security:
     oauth2:
       client:
